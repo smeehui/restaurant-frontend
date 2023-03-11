@@ -1,10 +1,9 @@
 .wrapper {
-    margin-top: calc(
+    padding-top: calc(
         var(--default-header-height) + var(--default-header-nav-height)
     ) !important;
     display: flex;
-}
-.content {
+    height: 100vh;
 }
 .show {
     animation: show 350ms forwards;
@@ -17,12 +16,12 @@
         width: 0%;
     }
     100% {
-        width: 16.66666667%;
+        width: 16.6666%;
     }
 }
 @keyframes hide {
     0% {
-        width: 16.66666667%;
+        width: 16.6666%;
     }
     100% {
         width: 0%;

@@ -2,11 +2,11 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    height: 100vh;
+    height: 100%;
+    background: #15171c8f;
 }
 .nav-body {
     position: absolute;
-    background: #15171c8f;
     height: 100%;
     display: flex;
     transition: 500ms;

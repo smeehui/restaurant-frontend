@@ -1,13 +1,14 @@
 import clsx from "clsx";
-import { useState } from "react";
+import { useContext } from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import { AppContext } from "~/store";
 import Header from "../Header/Header";
-import Navigation from "../Header/Navigation";
 import RightNav from "../RightNav/RightNav";
 import styles from "./DefaultLayout.module.scss";
 
 function DefaultLayout({ children }) {
-   
+    const [state] = useContext(AppContext);
+    const { isShowSidebar } = state;
     return (
         <Container fluid>
             <Header />
@@ -15,16 +16,18 @@ function DefaultLayout({ children }) {
                 <Col
                     lg={2}
                     className={clsx("position-relative", {
-                        [styles.show]: showSideBar,
-                        [styles.hide]: !showSideBar,
+                        [styles.show]: isShowSidebar,
+                        [styles.hide]: !isShowSidebar,
                     })}
                 >
-                    <RightNav
-                        showSideBar={showSideBar}
-                        handleShowSidebar={handleShowSidebar}
-                    />
+                    <RightNav />
                 </Col>
-                <Col lg={showSideBar?10:12} md={10} sm={12} className={clsx(styles["content"])}>
+                <Col
+                    lg={10}
+                    md={10}
+                    sm={12}
+                    className={clsx(styles["content"])}
+                >
                     {children}
                 </Col>
             </Row>
