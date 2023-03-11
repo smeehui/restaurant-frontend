@@ -1,0 +1,22 @@
+.wrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+}
+.nav-body {
+    position: absolute;
+    background: #15171c8f;
+    height: 100%;
+    display: flex;
+    transition: 500ms;
+    top: 0;
+    bottom: 0;
+}
+
+.toggle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}

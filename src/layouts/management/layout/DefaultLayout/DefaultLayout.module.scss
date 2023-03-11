@@ -1,0 +1,30 @@
+.wrapper {
+    margin-top: calc(
+        var(--default-header-height) + var(--default-header-nav-height)
+    ) !important;
+    display: flex;
+}
+.content {
+}
+.show {
+    animation: show 350ms forwards;
+}
+.hide {
+    animation: hide 350ms forwards;
+}
+@keyframes show {
+    0% {
+        width: 0%;
+    }
+    100% {
+        width: 16.66666667%;
+    }
+}
+@keyframes hide {
+    0% {
+        width: 16.66666667%;
+    }
+    100% {
+        width: 0%;
+    }
+}

@@ -1,0 +1,12 @@
+.site-header {
+    // height: var(--default-header-height);
+    z-index: 999;
+    background: white;
+}
+
+.site-header > * {
+    margin: 0;
+}
+.header-nav {
+    height: var(--default-header-nav-height);
+}
