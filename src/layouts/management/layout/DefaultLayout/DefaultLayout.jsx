@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { AppContext } from "~/store";
 import Header from "../Header/Header";
@@ -23,10 +23,13 @@ function DefaultLayout({ children }) {
                     <RightNav />
                 </Col>
                 <Col
-                    lg={10}
-                    md={10}
+                    lg={isShowSidebar ? 10 : 12}
+                    md={isShowSidebar ? 10 : 12}
                     sm={12}
-                    className={clsx(styles["content"])}
+                    className={clsx(styles["content"], {
+                        [styles.narrow]: isShowSidebar,
+                        [styles.full]: !isShowSidebar,
+                    })}
                 >
                     {children}
                 </Col>

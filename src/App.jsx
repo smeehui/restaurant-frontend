@@ -5,18 +5,30 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "normalize.css/normalize.css";
 import "~/assets/css/GlobalStyles.module.scss";
 import { createContext, useState } from "react";
+import { publicRoutes } from "./routes";
 
 function App() {
-    const handleShowSidebar = () => {
-        setShowSidebar(!showSideBar);
-    };
-
     return (
-        <DefaultLayout>
-            <Routers>
-                <h3>Admin Page</h3>
-            </Routers>
-        </DefaultLayout>
+        <Routers>
+            <Routes>
+                {publicRoutes.map((route, index) => {
+                    const { path, element, layout } = route;
+                    const Page = element;
+                    const Layout = layout != null ? layout : DefaultLayout;
+                    return (
+                        <Route
+                            key={index}
+                            path={path}
+                            element={
+                                <Layout>
+                                    <Page />
+                                </Layout>
+                            }
+                        ></Route>
+                    );
+                })}
+            </Routes>
+        </Routers>
     );
 }
 
