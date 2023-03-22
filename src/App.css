@@ -1,0 +1,7 @@
+a[role="tab"].active {
+    background-color: #fff !important;
+    color: #333 !important;
+}
+.tab-pane.active.show {
+    min-height: 100% !important;
+}

@@ -1,14 +1,17 @@
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import Navigation from "./Navigation";
 import styles from "./Header.module.scss";
 import clsx from "clsx";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
-import ButtonCustom from "~/components/button/Button";
-import { memo } from "react";
+import ButtonCustom from "~/components/button/ButtonCustom";
+import { memo, useRef } from "react";
+import TippyCustom from "~/components/tippy/TippyCustom";
+import { userTippyData } from "./headerData";
+import Search from "./Search/Search";
 
 function Header() {
-    const loginIcon = <FontAwesomeIcon icon={faEnvelope} />;
+    const loginBtnRef = useRef();
+
+    const tippyData = userTippyData;
 
     return (
         <Container className={clsx("fixed-top", styles["site-header"])} fluid>
@@ -16,17 +19,32 @@ function Header() {
                 <Col xs={2}>
                     <h3>Logo</h3>
                 </Col>
+                <Col xs={4} className="offset-2">
+                    <Search/>
+                </Col>
                 <Col xs={4}>
-                    <ButtonCustom
-                        size={"btn-sm"}
-                        title={"login"}
-                        icon={loginIcon}
-                    />
+                    <TippyCustom
+                        items={tippyData}
+                        variants={{
+                            trigger: "mouseenter",
+                            hideOnClick: true,
+                            interactive: true,
+                            animation: "scale",
+                        }}
+                    >
+                        <ButtonCustom
+                            ref={loginBtnRef}
+                            size={"btn-sm"}
+                            title={"Quang Huy"}
+                            img={
+                                "https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8&w=1000&q=80"
+                            }
+                            className="float-end"
+                        />
+                    </TippyCustom>
                 </Col>
             </Row>
-            <Row>
-                <Navigation />
-            </Row>
+            <Navigation />
         </Container>
     );
 }

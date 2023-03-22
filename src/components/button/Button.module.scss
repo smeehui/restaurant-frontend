@@ -3,11 +3,12 @@
 }
 
 .wrapper {
-    height: var(--default-button-height);
+    min-height: var(--default-button-height);
     border-radius: 5px;
     display: flex !important;
     align-items: center !important;
     cursor: pointer;
+    position: relative;
 }
 
 .wrapper:hover {
@@ -29,6 +30,18 @@
     margin-right: 4px;
     line-height: var(--default-button-height);
 }
+.icon-only {
+    margin: 0;
+}
 .no-outline {
     background: transparent;
+}
+
+.image {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: block;
+    object-fit: cover;
+    margin-left: 10px;
 }

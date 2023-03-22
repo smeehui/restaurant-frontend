@@ -1,7 +1,7 @@
 .site-header {
     height: var(--default-header-height);
     z-index: 999;
-    background: white;
+    background-color: var(--secondary-bg-color);
 }
 
 .site-header > * {
@@ -9,4 +9,11 @@
 }
 .header-nav {
     height: var(--default-header-nav-height);
+    align-items: center;
+}
+.toggle {
+    background-color: var(--secondary-bg-color);
+    float: left;
+    width: fit-content !important;
+    height: var(--default-button-height);
 }

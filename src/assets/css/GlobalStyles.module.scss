@@ -2,10 +2,19 @@
     --default-header-height: 50px;
     --default-header-nav-height: 44px;
     --default-button-height: 32px;
+    --primary-bg-color: #454d55;
+    --secondary-bg-color: #343a40;
+    --primary-font-color: #ffff;
+    --default-hover-bg-color: #a6b1bb;
+    --default-light-color: #a6b1bb;
 }
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-size: 16px;
+}
+
+body {
+    background-color: var(--primary-bg-color);
 }

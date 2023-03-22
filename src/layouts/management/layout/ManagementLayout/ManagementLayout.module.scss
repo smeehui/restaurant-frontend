@@ -7,7 +7,7 @@
 }
 
 .content {
-    background: #acabab;
+    background: var(--primary-bg-color);
 }
 .show {
     animation: show 350ms linear forwards;
@@ -38,6 +38,8 @@
     100% {
         width: 0%;
         padding: 0;
+        opacity: 0;
+        z-index: -1;
     }
 }
 @keyframes full {

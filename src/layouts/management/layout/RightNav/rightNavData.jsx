@@ -1,39 +1,35 @@
 import {
-    faArrowDown,
-    faArrowUp,
     faDashboard,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { config } from "~/config";
+const { routes } = config;
 
-const DashboardIcon = () => (<FontAwesomeIcon icon={faDashboard} />);
+const DashboardIcon = () => <FontAwesomeIcon icon={faDashboard} />;
 const UserManagerIcon = () => <FontAwesomeIcon icon={faDashboard} />;
-const IconClosed = () => <FontAwesomeIcon icon={faArrowUp} />;
-const IconOpened = () => <FontAwesomeIcon icon={faArrowDown} />;
 
 export const rightNavData = [
     {
         title: "Dashboard",
-        path: "/admin/dashboard",
+        path: routes.dashboard,
         icon: DashboardIcon,
     },
     {
-        title: "User management",
+        title: "Users",
         path: "#",
-          icon: UserManagerIcon,
-          iconClosed: IconClosed,
-          iconOpened: IconOpened,
-          subMenu: [
+        icon: UserManagerIcon,
+        subMenu: [
             {
-                title: "management 1",
-                path: "/admin/dashboard",
+                title: "New user",
+                path: routes.newUser,
                 icon: DashboardIcon,
             },
             {
-                title: "management 2",
-                path: "/admin/dashboard",
+                title: "All users",
+                path: routes.userManagement,
                 icon: DashboardIcon,
-            }
-          ]
+            },
+        ],
     },
     {
         title: "Dashboard",
@@ -41,22 +37,20 @@ export const rightNavData = [
         icon: DashboardIcon,
     },
     {
-        title: "Product management",
+        title: "Products",
         path: "#",
-          icon: UserManagerIcon,
-          iconClosed: IconClosed,
-          iconOpened: IconOpened,
-          subMenu: [
+        icon: UserManagerIcon,
+        subMenu: [
             {
-                title: "management 1",
+                title: "All products",
                 path: "/admin/dashboard",
                 icon: DashboardIcon,
             },
             {
-                title: "management 2",
+                title: "All categories",
                 path: "/admin/dashboard",
                 icon: DashboardIcon,
-            }
-          ]
-    },
+            },
+        ],
+    }
 ];

@@ -4,9 +4,9 @@ import { Col, Container, Row } from "react-bootstrap";
 import { AppContext } from "~/store";
 import Header from "../Header/Header";
 import RightNav from "../RightNav/RightNav";
-import styles from "./DefaultLayout.module.scss";
+import styles from "./ManagementLayout.module.scss";
 
-function DefaultLayout({ children }) {
+function ManagementLayout({ children }) {
     const [state] = useContext(AppContext);
     const { isShowSidebar } = state;
     return (
@@ -38,4 +38,4 @@ function DefaultLayout({ children }) {
     );
 }
 
-export default DefaultLayout;
+export default ManagementLayout;

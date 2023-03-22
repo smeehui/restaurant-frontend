@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { memo } from "react";
-import styles from "./RightNav.module.scss"; 
+import styles from "./RightNav.module.scss";
 
 import { rightNavData } from "./rightNavData";
 import RightNavItem from "./RightNavItem";

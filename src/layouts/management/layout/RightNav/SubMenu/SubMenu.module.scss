@@ -1,0 +1,11 @@
+.item-wrapper {
+    display: block;
+    padding: 5px 10px 5px 40px !important;
+    transition: 350ms ease-in-out;
+}
+
+.item-wrapper:hover {
+    padding-left: 45px !important;
+    border-radius: 5px;
+    background-color: var(--default-hover-bg-color);
+}
