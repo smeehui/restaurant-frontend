@@ -3,21 +3,37 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Button } from "react-bootstrap";
 import DataTable from "react-data-table-component-with-filter";
+import { arrayObjectUniqueCollector } from "~/utils";
 import { columns, userData } from "./userListData";
 
 function ManageUser() {
     const [selectedRows, setSelectedRows] = useState([]);
     const [toggleCleared, setToggleCleared] = useState(false);
     const [data, setData] = useState(userData);
-    const [selectedRow, setSelectedRow] = useState({});
-    const handleRowSelected = useCallback((state) => {
-        setSelectedRows(state.selectedRows);
-        state.selectedRows.map((row) => {
-            if (!row.selected) {
-                return (row.selected = true);
-            }
-        });
-    }, []);
+    const [tableState, setTableState] = useState({
+        selectedRows: []
+    });
+
+    const handleRowSelected = useCallback(
+        (state) => {
+            setTableState((prev) => {
+                const prevRows = prev.selectedRows || [];
+                const nextRows = [...state.selectedRows];
+                const currRow = arrayObjectUniqueCollector(
+                    prevRows,
+                    nextRows,
+                    "id",
+                )[0];
+                if (currRow) currRow.selected = !currRow.selected;
+                return {
+                    ...prev,
+                    ...state,
+                };
+            });
+            setSelectedRows(state.selectedRows);
+        },
+        [selectedRows, tableState],
+    );
 
     const conditionalRowStyles = [
         {
@@ -30,8 +46,6 @@ function ManageUser() {
     ];
 
     const contextActions = useMemo(() => {
-        console.log("memo");
-
         const handleDelete = () => {
             if (
                 window.confirm(
@@ -46,15 +60,40 @@ function ManageUser() {
         };
 
         return (
-            <Button
-                key="delete"
-                onClick={handleDelete}
-                style={{ backgroundColor: "red" }}
-            >
-                Delete
-            </Button>
+            <>
+                {tableState.selectedRows.length === 1 ? (
+                   <>
+                        <Button
+                            key="edit"
+                            onClick={handleDelete}
+                            variant="success"
+                        >
+                            Edit
+                        </Button>
+                        <Button
+                            key="delete"
+                            onClick={handleDelete}
+                            style={{ backgroundColor: "red" }}
+                        >
+                            Delete
+                        </Button>
+                   </>
+                ) : (
+                    <Button
+                        key="delete"
+                        onClick={handleDelete}
+                        style={{ backgroundColor: "red" }}
+                    >
+                        Delete
+                    </Button>
+                )}
+            </>
         );
     }, [data, selectedRows, toggleCleared]);
+
+    const handleSelectedRow = (row) => {
+        console.log(row);
+    };
     return (
         <DataTable
             title="All users"
@@ -62,9 +101,7 @@ function ManageUser() {
             data={data}
             selectableRows
             contextActions={contextActions}
-            onSelectedRowsChange={(prevState) => {
-                console.log(prevState);
-            }}
+            onSelectedRowsChange={handleRowSelected}
             clearSelectedRows={toggleCleared}
             highlightOnHover
             onRowClicked={(row) => console.log(row)}
@@ -74,6 +111,7 @@ function ManageUser() {
             sortIcon={<FontAwesomeIcon icon={faArrowAltCircleDown} />}
             pagination
             responsive
+            selectableRowsNoSelectAll
         />
     );
 }
