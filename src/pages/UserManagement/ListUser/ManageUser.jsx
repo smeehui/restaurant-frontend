@@ -4,15 +4,21 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Button } from "react-bootstrap";
 import DataTable from "react-data-table-component-with-filter";
 import { arrayObjectUniqueCollector } from "~/utils";
-import { columns, userData } from "./userListData";
+import getAllUsers from "../service/userService";
+import { columns } from "./userListData";
 
 function ManageUser() {
     const [selectedRows, setSelectedRows] = useState([]);
     const [toggleCleared, setToggleCleared] = useState(false);
-    const [data, setData] = useState(userData);
+    const [data, setData] = useState([]);
     const [tableState, setTableState] = useState({
-        selectedRows: []
+        selectedRows: [],
     });
+    useEffect(() => {
+        getAllUsers().then((data)=>{
+            setData(data)
+        })
+    },[]);
 
     const handleRowSelected = useCallback(
         (state) => {
@@ -62,7 +68,7 @@ function ManageUser() {
         return (
             <>
                 {tableState.selectedRows.length === 1 ? (
-                   <>
+                    <>
                         <Button
                             key="edit"
                             onClick={handleDelete}
@@ -77,7 +83,7 @@ function ManageUser() {
                         >
                             Delete
                         </Button>
-                   </>
+                    </>
                 ) : (
                     <Button
                         key="delete"
