@@ -7,54 +7,5 @@
 }
 
 .content {
-    background: var(--primary-bg-color);
-}
-.show {
-    animation: show 350ms linear forwards;
-}
-.hide {
-    animation: hide 350ms linear forwards;
-}
-.full {
-    animation: full 350ms linear forwards;
-}
-.narrow {
-    animation: narrow 350ms linear forwards;
-}
-@keyframes show {
-    0% {
-        width: 0%;
-        padding: 0;
-    }
-    100% {
-        width: 16.6666%;
-        padding: 0 12px 0 12px;
-    }
-}
-@keyframes hide {
-    0% {
-        width: 16.6666%;
-    }
-    100% {
-        width: 0%;
-        padding: 0;
-        opacity: 0;
-        z-index: -1;
-    }
-}
-@keyframes full {
-    0% {
-        width: 83.33333333%;
-    }
-    100% {
-        width: 100%;
-    }
-}
-@keyframes narrow {
-    0% {
-        width: 100%;
-    }
-    100% {
-        width: 83.33333333%;
-    }
+    // background: var(--primary-bg-color);
 }

@@ -1,0 +1,14 @@
+.active {
+    text-decoration: underline;
+    color: #131ff9;
+    &::before {
+        text-decoration: none;
+    }
+}
+.item {
+    letter-spacing: 1px;
+    margin: 0 3px;
+    &::before {
+        content: "/";
+    }
+}

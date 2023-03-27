@@ -1,6 +1,5 @@
 import { BrowserRouter as Routers, Routes, Route } from "react-router-dom";
 import "~/App.css";
-import DefaultLayout from "./layouts/management/layout/ManagementLayout/ManagementLayout";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "normalize.css/normalize.css";
 import "~/assets/css/GlobalStyles.module.scss";

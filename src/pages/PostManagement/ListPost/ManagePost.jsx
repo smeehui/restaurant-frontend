@@ -8,7 +8,7 @@ import { getAllUsers, searchUsers } from "../service/userService";
 import UserDTHeader from "./UserDTHeader";
 import { columns } from "./userListData";
 
-function ManageUser() {
+function ManagePost() {
     const [data, setData] = useState([]);
     const [filterText, setFilterText] = useState("");
     const [state, dispatch] = useContext(AppContext);
@@ -70,4 +70,4 @@ function ManageUser() {
     );
 }
 
-export default ManageUser;
+export default ManagePost;
