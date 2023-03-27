@@ -1,8 +1,7 @@
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { memo, useRef } from "react";
-import { Col, FormControl, FormGroup, InputGroup, Row } from "react-bootstrap";
-import { Form } from "react-router-dom";
+import {faSearch} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import React, {memo, useRef} from "react";
+import {Col, FormControl, Row} from "react-bootstrap";
 import ButtonCustom from "~/components/button/ButtonCustom";
 
 function UserDTHeader({ title, filter }) {

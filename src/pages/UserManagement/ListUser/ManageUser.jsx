@@ -1,12 +1,12 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, {useCallback, useContext, useEffect, useState} from "react";
 import useDebounce from "~/hooks/useDebounce";
-import { useIsMount } from "~/hooks/useIsMount";
+import {useIsMount} from "~/hooks/useIsMount";
 import DataTableCustom from "~/layouts/management/components/DataTableCustom";
-import { AppContext } from "~/store";
-import { API_CALLED, CALLING_API } from "~/store/constants";
-import { getAllUsers, searchUsers } from "../service/userService";
+import {AppContext} from "~/store";
+import {API_CALLED, CALLING_API} from "~/store/constants";
+import {getAllUsers, searchUsers} from "../service/userService";
 import UserDTHeader from "./UserDTHeader";
-import { columns } from "./userListData";
+import {columns} from "./userTBFormat.jsx";
 
 function ManageUser() {
     const [data, setData] = useState([]);

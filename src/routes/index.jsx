@@ -4,6 +4,7 @@ import Dashboard from "~/pages/Dashboard/Dashboard";
 import Report from "~/pages/Report/Report";
 import ManageUser from "~/pages/UserManagement/ListUser/ManageUser";
 import NewUser from "~/pages/UserManagement/NewUser/NewUser";
+import ManagePost from "~/pages/PostManagement/ListPost/ManagePost.jsx";
 
 const { routes } = config;
 
@@ -16,6 +17,7 @@ const publicRoutes = [
         layout: ManagementLayout,
     },
     { path: routes.newUser, element: NewUser, layout: ManagementLayout },
+    { path: routes.PostManagement, element: ManagePost, layout: ManagementLayout },
     { path: routes.report, element: Report, layout: ManagementLayout },
 ];
 

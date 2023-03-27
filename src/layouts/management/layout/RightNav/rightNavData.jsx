@@ -44,7 +44,7 @@ export const rightNavData = [
         subMenu: [
             {
                 title: "Chưa phê duyệt",
-                path: routes.newUser,
+                path: routes.PostManagement,
             },
             {
                 title: "Đã phê duyệt",

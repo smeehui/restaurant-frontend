@@ -1,9 +1,8 @@
 import clsx from "clsx";
-import { useContext, useEffect, useRef } from "react";
-import { Col, Container, Row } from "react-bootstrap";
-import { ProSidebarProvider } from "react-pro-sidebar";
-import { useLocation } from "react-router-dom";
-import { AppContext } from "~/store";
+import {useContext} from "react";
+import {Container} from "react-bootstrap";
+import {ProSidebarProvider} from "react-pro-sidebar";
+import {AppContext} from "~/store";
 import Header from "../Header/Header";
 import RightNav from "../RightNav/RightNav";
 import styles from "./ManagementLayout.module.scss";

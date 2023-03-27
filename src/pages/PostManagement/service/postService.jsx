@@ -1,4 +1,5 @@
-import { default as axios } from "axios";
+import {default as axios} from "axios";
+import {GET_ALL_POST} from "~/config/api.jsx";
 
 const getAllPosts = async () => {
     console.log("getting all posts....");
@@ -15,12 +16,8 @@ const getAllPosts = async () => {
     // };
 
     let result = await axios({
-        url: GET_ALL_USER,
+        url: GET_ALL_POST,
         method: "get",
-        // headers: {
-        //     "content-type": "application/json",
-        // },
-        // data: JSON.stringify(graphqlQuery),
     }).catch((jqXHR) => console.log(jqXHR));
     return result.data;
 };

@@ -1,43 +1,25 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, {useCallback, useContext, useEffect, useState} from "react";
 import useDebounce from "~/hooks/useDebounce";
-import { useIsMount } from "~/hooks/useIsMount";
+import {useIsMount} from "~/hooks/useIsMount";
 import DataTableCustom from "~/layouts/management/components/DataTableCustom";
-import { AppContext } from "~/store";
-import { API_CALLED, CALLING_API } from "~/store/constants";
-import { getAllUsers, searchUsers } from "../service/userService";
-import UserDTHeader from "./UserDTHeader";
-import { columns } from "./userListData";
+import {AppContext} from "~/store";
+import PostDTHeader from "./PostDTHeader.jsx";
+import {columns} from "./postTBFormat.jsx";
+import {API_CALLED, CALLING_API} from "~/store/constants.js";
+import {getAllPosts} from "~/pages/PostManagement/service/postService.jsx";
 
-function ManagePost() {
+function ManagePost(callback, deps) {
     const [data, setData] = useState([]);
-    const [filterText, setFilterText] = useState("");
     const [state, dispatch] = useContext(AppContext);
     const isMount = useIsMount();
-
-    const debouncedFilterText = useDebounce(filterText, 500);
-
-    const handleFilter = useCallback((value) => {
-        setFilterText(value);
+    const handleFilter = useCallback((filter) => {
+        console.log(filter)
     });
-
-    const callSearchUsers = useCallback(async () => {
-        dispatch(CALLING_API);
-        const data = await searchUsers(debouncedFilterText).finally(() =>
-            dispatch(API_CALLED),
-        );
-        setData(data);
-    });
-
-    useEffect(() => {
-        if (isMount) return; //Skip call search api at first rendering
-        callSearchUsers();
-    }, [debouncedFilterText]);
-
-    const filter = { filterText, handleFilter, callSearchUsers };
+    const filter = {handleFilter}
 
     useEffect(() => {
         dispatch(CALLING_API);
-        getAllUsers()
+        getAllPosts()
             .then((data) => {
                 setData(data);
             })
@@ -62,7 +44,7 @@ function ManagePost() {
                 </div>
             )}
             <DataTableCustom
-                title={<UserDTHeader title="All User" filter={filter} />}
+                title={<PostDTHeader title="All posts" filter={filter} />}
                 dataList={data}
                 columns={columns}
             />

@@ -1,33 +1,22 @@
 const columns = [
     {
-        name: "BÀI VIẾT",
-        selector: (row) => row.title,
+        name: "Họ tên",
+        selector: (row) => row.fullName,
         sortable: true,
     },
     {
-        name: "THÀNH PHỐ",
-        selector: (row) => {
-            const { locationDetail, wardName, districtName, provinceName } =
-                row.location;
-            return `${locationDetail && locationDetail + " ,"}${
-                wardName && wardName + " ,"
-            }${districtName && districtName + " ,"}${
-                provinceName && provinceName
-            }`;
-        },
+        name: "Email",
+        selector: (row) => row.email,
         sortable: true,
     },
     {
-        name: "TÊN NGƯỜI DÙNG",
-        selector: (row) => {
-            const { fullName } = row.user;
-            return fullName;
-        },
+        name: "Mô tả",
+        selector: (row) => row.description,
         sortable: true,
     },
     {
-        name: "NGÀY ĐĂNG",
-        selector: (row) => row.createdAt,
+        name: "Số ĐT",
+        selector: (row) => row.phone,
         sortable: true,
     },
 ];
