@@ -1,15 +1,24 @@
 import useLocalStorage from "~/hooks/useLocalStorage";
-import { TOGGLE_SIDEBAR } from "./constants";
+import { API_CALLED, CALLING_API, TOGGLE_SIDEBAR } from "./constants";
 
 const { get, save } = useLocalStorage();
-const initState = { isShowSidebar: get("isShowSidebar") || false };
+const initState = {
+    isShowSidebar: get("isShowSidebar") || false,
+    isCallingApi: false,
+};
 console.log(initState);
 
 const reducer = (state, action, args) => {
     switch (action) {
         case TOGGLE_SIDEBAR:
             state = { ...state, isShowSidebar: !state.isShowSidebar };
-            save("isShowSidebar",state.isShowSidebar)
+            save("isShowSidebar", state.isShowSidebar);
+            break;
+        case CALLING_API:
+            state = { ...state, isCallingApi: true };
+            break;
+        case API_CALLED:
+            state = { ...state, isCallingApi: false };
             break;
 
         default:

@@ -1,12 +1,15 @@
 import {
-    faDashboard,
+    faCalendar,
+    faDashboard, faGear, faGears, faHome, faHomeAlt, faUser, faUserFriends, faUserGroup,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { config } from "~/config";
 const { routes } = config;
 
-const DashboardIcon = () => <FontAwesomeIcon icon={faDashboard} />;
-const UserManagerIcon = () => <FontAwesomeIcon icon={faDashboard} />;
+const DashboardIcon = () => <FontAwesomeIcon icon={faDashboard} color="#f73486" />;
+const UserManagerIcon = () => <FontAwesomeIcon icon={faGear} color="#f73486" />;
+const User = () => <FontAwesomeIcon icon={faUser} color="#f73486" />;
+const Post = () => <FontAwesomeIcon icon={faCalendar} color="#f73486" />;
 
 export const rightNavData = [
     {
@@ -15,42 +18,39 @@ export const rightNavData = [
         icon: DashboardIcon,
     },
     {
-        title: "Users",
+        title: "Quản trị viên",
         path: "#",
         icon: UserManagerIcon,
         subMenu: [
             {
-                title: "New user",
+                title: "Thêm mới",
                 path: routes.newUser,
-                icon: DashboardIcon,
             },
             {
-                title: "All users",
+                title: "Danh sách",
                 path: routes.userManagement,
-                icon: DashboardIcon,
             },
         ],
     },
     {
-        title: "Dashboard",
-        path: "/admin/dashboard",
-        icon: DashboardIcon,
+        title: "Người dùng",
+        path: "#",
+        icon: User,
     },
     {
-        title: "Products",
+        title: "Bài viết",
         path: "#",
-        icon: UserManagerIcon,
+        icon: Post,
         subMenu: [
             {
-                title: "All products",
-                path: "/admin/dashboard",
-                icon: DashboardIcon,
+                title: "Chưa phê duyệt",
+                path: routes.newUser,
             },
             {
-                title: "All categories",
-                path: "/admin/dashboard",
-                icon: DashboardIcon,
+                title: "Đã phê duyệt",
+                path: routes.userManagement,
             },
         ],
-    }
+    },
+
 ];

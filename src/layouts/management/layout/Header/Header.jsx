@@ -6,8 +6,7 @@ import ButtonCustom from "~/components/button/ButtonCustom";
 import { memo, useRef } from "react";
 import TippyCustom from "~/components/tippy/TippyCustom";
 import { userTippyData } from "./headerData";
-import Search from "./Search/Search";
-
+import { HomeIcon } from "~/assets/icons/icons";
 function Header() {
     const loginBtnRef = useRef();
 
@@ -17,10 +16,7 @@ function Header() {
         <Container className={clsx("fixed-top", styles["site-header"])} fluid>
             <Row className="justify-content-between align-items-center h-100">
                 <Col xs={2}>
-                    <h3>Logo</h3>
-                </Col>
-                <Col xs={4} className="offset-2">
-                    <Search/>
+                    <HomeIcon/>
                 </Col>
                 <Col xs={4}>
                     <TippyCustom
@@ -44,6 +40,7 @@ function Header() {
                     </TippyCustom>
                 </Col>
             </Row>
+            <hr/>
             <Navigation />
         </Container>
     );

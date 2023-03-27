@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import styles from "../NewUser.module.scss";
+import userDefaultImg from "~/assets/img/default-user.png";
 
 import {
     Col,
@@ -17,13 +18,14 @@ import clsx from "clsx";
 import ButtonCustom from "~/components/button/ButtonCustom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import ErrorMessage from "./ErrorMessage";
 
 function NewUserForm() {
     const formik = useFormik({
         initialValues: {
             fullName: "",
             email: "",
-            password: "",
+            phone: "",
         },
         validationSchema: Yup.object({
             fullName: Yup.string()
@@ -36,26 +38,45 @@ function NewUserForm() {
                     "Invalid email address",
                 )
                 .required("Required"),
+            phone: Yup.string().required("Phone is required"),
+            address: Yup.string().required("Address is required"),
         }),
         onSubmit: (values) => {
-            const { fullName, email, password } = values;
+            const { fullName, email, phone, address } = values;
             let formData = new FormData();
-            formData.append("fullName",fullName);
-            formData.append("email",email);
-            formData.append("password",password);
+            formData.append("fullName", fullName);
+            formData.append("email", email);
+            formData.append("phone", phone);
+            formData.append("address", address);
             console.log(formData);
         },
     });
     let fullNameError = !!(formik.touched.fullName && formik.errors.fullName);
     let emailError = !!(formik.touched.email && formik.errors.email);
+    let phoneError = !!(formik.touched.phone && formik.errors.phone);
+    let addressError = !!(formik.touched.address && formik.errors.address);
+
+    const imgRef = useRef();
+
+    const [imgSrc, setImgSrc] = useState(userDefaultImg);
+
+    const handleUploadImg = () => {
+        const file = imgRef.current.files[0];
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+            const src = URL.createObjectURL(file);
+            setImgSrc(src);
+        
+        };
+    };
+
     return (
-        <Form onSubmit={formik.handleSubmit}>
+        <Form onSubmit={formik.handleSubmit} className={clsx(styles.form)}>
             <Row className="mb-3">
-                <Col xs={6}>
-                    <FormGroup className="mb-3">
-                        <FormLabel className="text-white" htmlFor="fullNameCre">
-                            Full Name
-                        </FormLabel>
+                <Col lg={4} md={6} sm={12}>
+                    <FormGroup>
+                        <FormLabel htmlFor="fullNameCre">Full Name</FormLabel>
                         <FormControl
                             name="fullName"
                             type="text"
@@ -68,15 +89,13 @@ function NewUserForm() {
                             }
                         />
                         {fullNameError ? (
-                            <FormText className="text-danger border-danger fw-bold">
-                                {formik.errors.fullName}
-                            </FormText>
-                        ) : null}
+                            <ErrorMessage message={formik.errors.fullName} />
+                        ) : (
+                            <ErrorMessage className="invisible" message="|" />
+                        )}
                     </FormGroup>
-                    <FormGroup className="mb-3">
-                        <FormLabel className="text-white" htmlFor="emailCre">
-                            Email
-                        </FormLabel>
+                    <FormGroup>
+                        <FormLabel htmlFor="emailCre">Email</FormLabel>
                         <FormControl
                             autoComplete="email"
                             type="email"
@@ -88,36 +107,62 @@ function NewUserForm() {
                             className={emailError && "border-2 border-danger"}
                         />
                         {emailError ? (
-                            <FormText className="text-danger border-danger fw-bold">
-                                {formik.errors.email}
-                            </FormText>
-                        ) : null}
-                    </FormGroup>
-                    <FormGroup className="mb-3">
-                        <FormLabel className="text-white" htmlFor="passwordCre">
-                            Password
-                        </FormLabel>
-                        <FormControl
-                            type="password"
-                            id="passwordCre"
-                            autoComplete="current-password"
-                        />
+                            <ErrorMessage message={formik.errors.email} />
+                        ) : (
+                            <ErrorMessage className="invisible" message={"|"} />
+                        )}
                     </FormGroup>
                 </Col>
-                <Col xs={6}>
-                    <FormGroup className="text-white position-relative h-100 d-flex">
+                <Col lg={4} md={6} sm={12}>
+                    <FormGroup>
+                        <FormLabel htmlFor="phoneCre">Phone</FormLabel>
+                        <FormControl
+                            name="phone"
+                            type="text"
+                            id="phoneCre"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.phone}
+                            className={phoneError && "border-2 border-danger"}
+                        />
+                        {phoneError ? (
+                            <ErrorMessage message={formik.errors.phone} />
+                        ) : (
+                            <ErrorMessage className="invisible" message={"|"} />
+                        )}
+                    </FormGroup>
+                    <FormGroup>
+                        <FormLabel htmlFor="addressCre">Address</FormLabel>
+                        <FormControl
+                            type="text"
+                            id="addressCre"
+                            name="address"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.address}
+                            className={addressError && "border-2 border-danger"}
+                        />
+                        {addressError ? (
+                            <ErrorMessage message={formik.errors.address} />
+                        ) : (
+                            <ErrorMessage className="invisible" message={"|"} />
+                        )}
+                    </FormGroup>
+                </Col>
+                <Col lg={4} md={6} sm={12}>
+                    <FormGroup className="text-white position-relative h-100 d-flex justify-content-center">
                         <FormLabel
                             className={clsx(styles["select-text"])}
                             htmlFor="fileCre"
-                        >
-                            Chọn ảnh
-                        </FormLabel>
+                        ></FormLabel>
                         <FormControl
+                            ref={imgRef}
                             id="fileCre"
                             type="file"
                             multiple
                             accept="image/*"
                             hidden
+                            onChange={handleUploadImg}
                         />
                         <Image
                             id="imgPreviewCre"
@@ -125,16 +170,19 @@ function NewUserForm() {
                                 styles["img-preview"],
                                 "container-fluid",
                             )}
+                            src={imgSrc}
                         />
                     </FormGroup>
                 </Col>
             </Row>
             <Row>
-                <Col xs={2}>
+                <Col lg={2} md={6} sm={12}>
                     <ButtonCustom
                         type="submit"
                         title={"Create"}
                         icon={<FontAwesomeIcon icon={faPlusCircle} />}
+                        variant="success"
+                        className="text-success"
                     />
                 </Col>
             </Row>
